@@ -6,9 +6,9 @@ import { AlertController, NavController, ToastController } from 'ionic-angular';
 
 @Component({
   selector: 'page-user',
-  templateUrl: 'support.html'
+  templateUrl: 'home.html'
 })
-export class SupportPage {
+export class HomePage {
 
   submitted: boolean = false;
   supportMessage: string;

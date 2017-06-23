@@ -8,5 +8,12 @@
 </ion-header>
 
 <ion-content class="map-page">
-  <div style="height: 100%; width: 100%" #mapCanvas id="map_canvas"></div>
+  <div style="height: 80%; width: 100%" #mapCanvas id="map">
+
+  </div>
+  <div id = "camerabut">
+  <button ion-button>End</button>
+  <button ion-button (click)="takePicture()">Camera</button>
+  </div>
+  <img [src]="base64Image" *ngIf="base64Image" />
 </ion-content>

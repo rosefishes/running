@@ -24,11 +24,20 @@ import { SpeakerDetailPage } from '../pages/speaker-detail/speaker-detail';
 import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
+import { HomePage } from '../pages/home/home';
+import { StartPage } from '../pages/start/start';
 import { SupportPage } from '../pages/support/support';
-
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
-
+import {
+ GoogleMaps,
+ GoogleMap,
+ GoogleMapsEvent,
+ LatLng,
+ CameraPosition,
+ MarkerOptions,
+ Marker
+} from '@ionic-native/google-maps';
 
 @NgModule({
   declarations: [
@@ -46,6 +55,8 @@ import { UserData } from '../providers/user-data';
     SpeakerListPage,
     TabsPage,
     TutorialPage,
+    HomePage,
+    StartPage,
     SupportPage
   ],
   imports: [
@@ -62,10 +73,11 @@ import { UserData } from '../providers/user-data';
         { component: MapPage, name: 'Map', segment: 'map' },
         { component: AboutPage, name: 'About', segment: 'about' },
         { component: TutorialPage, name: 'Tutorial', segment: 'tutorial' },
-        { component: SupportPage, name: 'SupportPage', segment: 'support' },
+        { component: HomePage, name: 'HomePage', segment: 'home' },
         { component: LoginPage, name: 'LoginPage', segment: 'login' },
         { component: AccountPage, name: 'AccountPage', segment: 'account' },
-        { component: SignupPage, name: 'SignupPage', segment: 'signup' }
+        { component: SignupPage, name: 'SignupPage', segment: 'signup' },
+        { component: StartPage, name: 'StartPage', segment: 'start' }
       ]
     }),
     IonicStorageModule.forRoot()
@@ -86,14 +98,16 @@ import { UserData } from '../providers/user-data';
     SpeakerListPage,
     TabsPage,
     TutorialPage,
-    SupportPage
+    HomePage,
+    StartPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     ConferenceData,
     UserData,
     InAppBrowser,
-    SplashScreen
+    SplashScreen,
+    GoogleMaps
   ]
 })
 export class AppModule { }
