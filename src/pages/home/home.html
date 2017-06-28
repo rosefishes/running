@@ -16,7 +16,20 @@
 	<!-- <button>
 		<ion-icon name="logo-facebook"></ion-icon>
 	</button> -->
-	<div id = "mainback">
+	<!-- <div id = "mainback">
 		<img src="assets/img/rr.png" />
-	</div>
+	</div> -->
+	<!-- <button (click) = "facebookLogin()">Facebook</button> -->
+	<button ion-button icon-left block (click) = "facebookLogin()">
+		<ion-icon name="logo-facebook"></ion-icon>
+		Login With Facebook
+	</button>
+
+	<button ion-button icon-left block (click) = "facebookLogout()">
+		<ion-icon name="logo-facebook"></ion-icon>
+		Logout
+	</button>
+	<button ion-button icon-left (click)="getDetails()">
+		Get Details
+	</button>
 	</ion-content>

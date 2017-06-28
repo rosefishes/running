@@ -1,33 +1,29 @@
 import { Component } from '@angular/core';
 // import { NgForm } from '@angular/forms';
-// import { Geolocation } from '@ionic-native/geolocation';
+import { Geolocation } from '@ionic-native/geolocation';
 import { MapPage } from '../map/map';
 import { AlertController, NavController } from 'ionic-angular';
 
 
 @Component({
   selector: 'page-user',
-
+  providers: [Geolocation],
   templateUrl: 'start.html'
 })
 export class StartPage {
   MapPage = MapPage;
-  constructor (public navCtrl: NavController){}
+  constructor (public navCtrl: NavController, private geolocation: Geolocation){}
 
-// onLocateUser(){
-//   this.geolocation.getCurrentPosition().then((resp) => {
-//     console.log(resp)
-// }).catch((error) => {
-//   console.log('Error getting location', error);
-// });
+onLocatePosition(){
+let position = this.geolocation.getCurrentPosition()
+position.then((resp) => {
+    this.navCtrl.push(resp.coords.latitude.toString())
+}).catch((error) => {
+  console.log('Error getting location', error);
+});
+}
 
-// let watch = this.geolocation.watchPosition();
-// watch.subscribe((data) => {
-//   console.log('this')
-//   console.log(data)
- // data can be a set of coordinates, or an error (if an error occurred).
- // data.coords.latitude
- // data.coords.longitude
-// });
-// }
+goMap() {
+    this.navCtrl.push(MapPage);
+}
 }

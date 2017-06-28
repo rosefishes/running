@@ -13,14 +13,12 @@ declare var google: any;
   templateUrl: 'map.html'
 })
 export class MapPage {
-  public base64Image: string;
+  public imageURL: string;
   @ViewChild('mapCanvas') mapElement: ElementRef;
   constructor(private camera: Camera, public confData: ConferenceData, public platform: Platform, private geolocation: Geolocation) {
   }
 
   ionViewDidLoad() {
-
-
     this.confData.getMap().subscribe((mapData: any) => {
       let mapEle = this.mapElement.nativeElement;
 
@@ -162,9 +160,8 @@ export class MapPage {
         strokeOpacity: 1.0,
         strokeWeight: 2
       });
-      let watch = this.geolocation.watchPosition();
-        watch.subscribe((data) => {
-      var myLatLng = {lat: data.coords.latitude, lng: data.coords.longitude};
+      this.geolocation.getCurrentPosition().then((resp) => {
+      var myLatLng = {lat: resp.coords.latitude, lng: resp.coords.longitude};
       var marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
@@ -178,7 +175,6 @@ export class MapPage {
       map.setMapTypeId('styled_map');
       flightPath.setMap(map);
     })
-
   }
   // const options: CameraOptions = {
   //   quality: 100,
@@ -192,12 +188,12 @@ export class MapPage {
   //  // If it's base64:
   //  let base64Image = 'data:image/jpeg;base64,' + imageData;
   // }, (err) => {
-  //  // Handle error
+  //  console.log(error)
   // });
 
   // takePicture(){
-  //   Camera.getPicture({
-  //       destinationType: Camera.DestinationType.DATA_URL,
+  //   this.camera.getPicture({
+  //       destinationType: this.camera.DestinationType.DATA_URL,
   //       targetWidth: 1000,
   //       targetHeight: 1000
   //   }).then((imageData) => {
@@ -206,6 +202,28 @@ export class MapPage {
   //   }, (err) => {
   //       console.log(err);
   //   });
+//   takePhoto(){
+//   this.camera.getPicture(this.options).then((imageData) => {
+//      this.imageURL = 'data:image/jpeg;base64,' + imageData;
+//   }, (err) => {
+//      console.log(err);
+//   });
+// }
   // }
+  options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
 
+
+    takePhoto(){
+      alert('hi')
+      this.camera.getPicture(this.options).then((imageData) => {
+         this.imageURL = 'data:image/jpeg;base64,' + imageData;
+      }, (err) => {
+         console.log(err);
+      });
+    }
 }

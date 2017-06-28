@@ -15,7 +15,7 @@
       Hello runner! <br /><br /> It is our pleasure to have you here with us at the Ridge Runners 5th Anniversary Run! <br /> <br />Press 'START' whenever you are ready to run. We will be tracking...
     </p>
     <img src = "assets/img/run1.png" />
-    <button ion-button block [navPush]="MapPage">
+    <button ion-button block (click)="goMap()" (click)="onLocatePosition()">
       Start
     </button>
   </div>

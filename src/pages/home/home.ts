@@ -2,10 +2,12 @@ import { Component } from '@angular/core';
 // import { NgForm } from '@angular/forms';
 
 import { AlertController, NavController, ToastController } from 'ionic-angular';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 
 
 @Component({
   selector: 'page-user',
+  providers: [Facebook],
   templateUrl: 'home.html'
 })
 export class HomePage {
@@ -16,11 +18,11 @@ export class HomePage {
   constructor(
     public navCtrl: NavController,
     public alertCtrl: AlertController,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    private fb: Facebook
   ) {
 
   }
-
   ionViewDidEnter() {
     let toast = this.toastCtrl.create({
       message: 'Welcome',
@@ -29,6 +31,43 @@ export class HomePage {
     toast.present();
   }
 
+facebookLogin(){
+  this.fb.login(['email'])
+  .then((resp)=>{
+    alert(JSON.stringify(resp.authResponse))
+  })}
+
+//       this.fb.getLoginStatus()}
+//       .then((response)=>{
+//         if(response.status == "connected"){
+//           this.fb.api("https://graph.facebook.com/" + resp.authResponse.userID + "?fields=id,name,gender", [])
+//         }
+//       })
+//
+//     .then((response)=> {
+//       alert(JSON.stringify(response))
+getDetails(){
+  this.fb.getLoginStatus()
+  .then((response)=>{
+    if (response.status == "connected"){
+      alert('hi')
+      this.fb.api("/" + response.authResponse.userID + "?fields=age_range", [])
+      .then((response)=>{
+        alert(JSON.stringify(response))
+      }, (error)=> {alert(error)
+    })
+  } else {
+    console.log('not logged in')
+  }
+  })
+}
+
+facebookLogout(){
+  this.fb.logout().then((response)=>{
+    alert(response.status)
+    alert(JSON.stringify(response))
+  })
+}
   // submit(form: NgForm) {
   //   this.submitted = true;
   //

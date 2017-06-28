@@ -8,7 +8,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { IonicStorageModule } from '@ionic/storage';
-
+import { Facebook } from '@ionic-native/facebook';
 import { ConferenceApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
@@ -38,7 +38,16 @@ import {
  MarkerOptions,
  Marker
 } from '@ionic-native/google-maps';
-
+// import firebase from 'firebase';
+// export const firebaseConfig={
+//       apiKey: "AIzaSyBmk7slTNF5Gc00-XJM2bg2F6VSm5eZUlk",
+//       authDomain: "running-1498203585799.firebaseapp.com",
+//       databaseURL: "https://running-1498203585799.firebaseio.com",
+//       projectId: "running-1498203585799",
+//       storageBucket: "running-1498203585799.appspot.com",
+//       messagingSenderId: "430846210310"
+// }
+// firebase.initializeApp(firebaseConfig)
 @NgModule({
   declarations: [
     ConferenceApp,
@@ -107,7 +116,8 @@ import {
     UserData,
     InAppBrowser,
     SplashScreen,
-    GoogleMaps
+    GoogleMaps,
+    Facebook
   ]
 })
 export class AppModule { }
